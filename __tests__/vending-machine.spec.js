@@ -38,11 +38,12 @@ describe("loading vending machine", () => {
         }
       },
 
-      cohorts: {
-        [test.cohort]: {
-          demographics: {
-            averageAge: 26.2,
-            averageExperience: 3.2
+      changes: {
+        [test.change]: {
+          inputs: {
+            input1: 0.35,
+            input2: 0.80,
+            input3: 1.25
           }
         }
       }
@@ -51,7 +52,7 @@ describe("loading vending machine", () => {
     test.project = test.processedData[test.projectName];
   });
 
-  describe("When user requests data", () => {
+  describe("When user loads vending machine", () => {
     describe("When project name exists", () => {
       it("should return how many passed the project", () => {
         const project = test.subject.queryProject(test.projectName);
@@ -85,15 +86,11 @@ describe("loading vending machine", () => {
       });
     });
 
-    describe("Querying cohort", () => {
-      describe("Determining the demographics within the cohort", () => {
-        it("should return average age of the students", () => {
-          const avgAge = test.subject.queryCohort(test.cohort);
-          expect(avgAge.demographics.averageAge).toBe(26.2);
-        });
-        it("should return average experience of the students", () => {
-          const avgExp = test.subject.queryCohort(test.cohort);
-          expect(avgExp.demographics.averageExperience).toBe(3.2);
+    describe("Getting change back", () => {
+      describe("When given change", () => {
+        it("should return in change", () => {
+          const change = test.subject.getChange(test.change);
+          expect(change.inputs.input3).toBe();
         });
       });
     });

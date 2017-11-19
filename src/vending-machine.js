@@ -22,7 +22,18 @@ module.exports = class VendingMachine {
     }
   }
 
-  queryCohort(cohort){
-    return this.data.cohorts[cohort]
+  getChange(inputChange){
+    const change = this.data.changes[inputChange]
+    // let dollar = null
+    // let quarter = null
+    // let nickel = null
+    // let dime = null
+
+    if(change > 1){
+      Math.trunc(change)
+      return newChange
+    }
+
+    return
   }
 }
