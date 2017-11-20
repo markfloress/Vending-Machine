@@ -5,35 +5,14 @@ module.exports = class VendingMachine {
     this.data = processedData(data)
   }
 
-  queryProject(name){
-    if(!this.data.projects[name]){
-      throw new Error('try another name')
-    } else {
-      return this.data.projects[name]         
-    }
-  } 
-
-  queryExpRange(min, max){
-    for(let i = min; i<max; i++){
-      const minimum = this.data.experience[min].averageSatisfaction
-      const maximum = this.data.experience[max].averageSatisfaction
-    
-      return totalAverage
-    }
-  }
-
   getChange(inputChange){
-    const change = this.data.changes[inputChange]
-    // let dollar = null
-    // let quarter = null
-    // let nickel = null
-    // let dime = null
+    const change = this.data.machine[inputChange]
+    const inventory = []
 
-    if(change > 1){
-      Math.trunc(change)
-      return newChange
+    for(let item in change){
+      inventory.push(change[item].item)
     }
 
-    return
+    return inventory.join(', ')
   }
 }
