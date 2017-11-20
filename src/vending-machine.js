@@ -29,15 +29,15 @@ module.exports = class VendingMachine {
       inventoryName.push(stock[name].itemName)
     }
 
-    const refillCount = inventoryCount.map( x => {
-      if(x < 15){
-        let increase = 15 - x
-        return x + increase
+    const refillCount = inventoryCount.map( count => {
+      if(count < 15){
+        let increase = 15 - count
+        return count + increase
       } else {
-        return x
+        return count
       }
 
-      return x
+      return count
     })
 
     const refilledStock = inventoryName.reduce((arr, val, idx) => {
@@ -99,5 +99,26 @@ module.exports = class VendingMachine {
     }, [])
 
     return resuppliedChange.join(', ')
+  }
+
+  filterSelection(machineStock, inputPayment){
+    const stock = this.data.machine[machineStock]
+    const payment = inputPayment
+    const selection = []
+    const filteredSelection = []
+
+    for(let item in stock){
+      selection.push(stock[item])
+    }
+
+    selection.map( item => {
+      if(item.price <= payment){
+        filteredSelection.push(item.itemName)
+      } else if ( payment < 1.24) {
+        throw new Error('GET MO MONAAY!')
+      }
+    })
+
+    return filteredSelection.join(', ')
   }
 }

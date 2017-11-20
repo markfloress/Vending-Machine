@@ -83,16 +83,23 @@ describe("loading vending machine", () => {
 
     describe("When user selects an item based on their payment", () => {
       it("should return items that can be purchased", () => {
-        const filter = test.subject.filterSelection(test.vending, "1.50");
+        const filter = test.subject.filterSelection(test.vending, 1.50);
         expect(filter).toBe("M&M Pack, RootBeer");
       });
     });
 
     describe("When user selects an item based on their payment", () => {
       it("should return items that can be purchased", () => {
-        const filter = test.subject.filterSelection(test.vending, "2.50");
+        const filter = test.subject.filterSelection(test.vending, 2.50);
         expect(filter).toBe("Mars Bar, M&M Pack, Coke, RootBeer");
       });
     });
+
+    describe("When user selects an item based on their payment", () => {
+      it("should return items that can be purchased", () => {
+        expect(() => test.subject.filterSelection(test.vending, 1.00)).toThrow();
+      });
+    });
+    
   });
 });
