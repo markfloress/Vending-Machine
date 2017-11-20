@@ -121,4 +121,54 @@ module.exports = class VendingMachine {
 
     return filteredSelection.join(', ')
   }
+
+
+  getChange(inputChange){
+    const change = inputChange
+    const noDecimal = Math.floor(change)
+    const noWholeNumber = change - noDecimal
+    const coinCount = []    
+
+    const dollar = noDecimal
+    if(dollar){
+      coinCount.push(`${dollar} dollar`)
+    }
+
+    const quarter = Math.floor(noWholeNumber / 0.25)
+    if(quarter){
+      coinCount.push(`${quarter} quarter`)
+    }
+
+    const dime = Math.floor((noWholeNumber - quarter*0.25) / 0.10)
+    if(dime){
+      coinCount.push(`${dime} dime`)
+    }
+
+    // nickel
+    if(quarter){
+      const nickel = Number(Math.floor((noWholeNumber - quarter*0.25) / 0.05))
+      if(nickel){coinCount.push(`${nickel} nickel`)}
+    } else if (dime){
+      const nickel = Number(Math.floor((noWholeNumber - dime*0.10) / 0.05))
+      if(nickel){coinCount.push(`${nickel} nickel`)}
+    } else {
+      null
+    }
+
+    // penny
+    if(quarter){
+      const penny = Number(Math.floor((noWholeNumber - quarter*0.25) / 0.01))
+      if(penny){coinCount.push(`${penny} penny`)}
+    } else if (dime){
+      const penny = Number(Math.floor((noWholeNumber - dime*0.10) / 0.01))
+      if(penny){coinCount.push(`${penny} penny`)}
+    } else if (nickel){
+      const penny = Number(Math.floor((noWholeNumber - nickel*0.05) / 0.01))
+      if(penny){coinCount.push(`${penny} penny`)}
+    } else {
+      null
+    }
+  
+    return coinCount.join(', ')
+  }
 }

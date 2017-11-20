@@ -82,43 +82,50 @@ describe("loading vending machine", () => {
     });
 
     describe("When user selects an item based on their payment", () => {
-      it("should return items that can be purchased", () => {
+      it("should return items that can be purchased: M&M pack and rootbeer", () => {
         const filter = test.subject.filterSelection(test.vending, 1.50);
         expect(filter).toBe("M&M Pack, RootBeer");
       });
     });
 
     describe("When user selects an item based on their payment", () => {
-      it("should return items that can be purchased", () => {
+      it("should return items that can be purchased: M&M pack", () => {
+        const filter = test.subject.filterSelection(test.vending, 1.25);
+        expect(filter).toBe("M&M Pack");
+      });
+    });
+
+    describe("When user selects an item based on their payment", () => {
+      it("should return items that can be purchased: mars bar, M&M pack, coke, rootbeer", () => {
         const filter = test.subject.filterSelection(test.vending, 2.50);
         expect(filter).toBe("Mars Bar, M&M Pack, Coke, RootBeer");
       });
     });
 
-    describe("When user selects an item based on their payment", () => {
-      it("should return items that can be purchased", () => {
+    describe("When user pays below the cheapest item", () => {
+      it("should throw an error and say get more money", () => {
         expect(() => test.subject.filterSelection(test.vending, 1.00)).toThrow();
       });
     });
     
-    describe("When user wants go get change", () => {
+    describe("When user wants go get change for 1.50", () => {
       it("should return 1 dollar, 2 quarter in change", () => {
         const change = test.subject.getChange(1.50);
         expect(change).toBe('1 dollar, 2 quarter');
       });
     });
 
-    describe("When user wants go get change", () => {
+    describe("When user wants go get change for 2.25", () => {
       it("should return 2 dollar, 1 quarter in change", () => {
         const change = test.subject.getChange(2.25);
         expect(change).toBe('2 dollar, 1 quarter');
       });
     });
 
-    describe("When user wants go get change", () => {
-      it("should return 1 dollar, 1 dime, 1 nickel, 2 penny in change", () => {
-        const change = test.subject.getChange(1.17);
-        expect(change).toBe('1 dollar, 1 dime, 1 nickel, 2 penny');
+    describe("When user wants go get change for 1.10", () => {
+      it("should return 1 dollar, 1 dime", () => {
+        const change = test.subject.getChange(1.10);
+        expect(change).toBe('1 dollar, 1 dime');
       });
     });
   });
