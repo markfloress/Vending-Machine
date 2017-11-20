@@ -73,5 +73,12 @@ describe("loading vending machine", () => {
         expect(refill).toBe("Mars Bar: 15, M&M Pack: 15, Coke: 15, Pepsi: 15, RootBeer: 15");
       });
     });
+
+    describe("When user resupplies the change", () => {
+      it("should return all the coins with maximum count", () => {
+        const refill = test.subject.refillStock(test.vending);
+        expect(refill).toBe("dollars: 10, quarter: 50, dime: 50, nickel: 100, penny: 200");
+      });
+    });
   });
 });
