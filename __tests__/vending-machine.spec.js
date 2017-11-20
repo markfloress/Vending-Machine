@@ -101,5 +101,25 @@ describe("loading vending machine", () => {
       });
     });
     
+    describe("When user wants go get change", () => {
+      it("should return 1 dollar, 2 quarter in change", () => {
+        const change = test.subject.getChange(1.50);
+        expect(change).toBe('1 dollar, 2 quarter');
+      });
+    });
+
+    describe("When user wants go get change", () => {
+      it("should return 2 dollar, 1 quarter in change", () => {
+        const change = test.subject.getChange(2.25);
+        expect(change).toBe('2 dollar, 1 quarter');
+      });
+    });
+
+    describe("When user wants go get change", () => {
+      it("should return 1 dollar, 1 dime, 1 nickel, 2 penny in change", () => {
+        const change = test.subject.getChange(1.17);
+        expect(change).toBe('1 dollar, 1 dime, 1 nickel, 2 penny');
+      });
+    });
   });
 });
