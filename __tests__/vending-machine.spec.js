@@ -80,5 +80,19 @@ describe("loading vending machine", () => {
         expect(resupply).toBe("dollar: 10, quarter: 50, dime: 50, nickel: 100, penny: 200");
       });
     });
+
+    describe("When user selects an item based on their payment", () => {
+      it("should return items that can be purchased", () => {
+        const filter = test.subject.filterSelection(test.vending, "1.50");
+        expect(filter).toBe("M&M Pack, RootBeer");
+      });
+    });
+
+    describe("When user selects an item based on their payment", () => {
+      it("should return items that can be purchased", () => {
+        const filter = test.subject.filterSelection(test.vending, "2.50");
+        expect(filter).toBe("Mars Bar, M&M Pack, Coke, RootBeer");
+      });
+    });
   });
 });
