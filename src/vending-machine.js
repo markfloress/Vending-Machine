@@ -5,12 +5,23 @@ module.exports = class VendingMachine {
     this.data = processedData(data)
   }
 
-  getChange(inputChange){
+  countInventory(inputChange){
     const change = this.data.machine[inputChange]
     const inventory = []
 
     for(let item in change){
-      inventory.push(change[item].item)
+      inventory.push(change[item].itemName)
+    }
+
+    return inventory.join(', ')
+  }
+
+  refillStock(inputChange){
+    const change = this.data.machine[inputChange]
+    const inventory = []
+
+    for(let item in change){
+      inventory.push(change[item].itemName)
     }
 
     return inventory.join(', ')

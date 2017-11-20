@@ -8,29 +8,49 @@ describe("loading vending machine", () => {
       machine: {
         [test.vending]: {
           1: {
-            item: "Mars Bar",
+            itemName: "Mars Bar",
             price: 2.25,
-            count: 10
+            itemStock: 10
           },
           2: {
-            item: "M&M Pack",
+            itemName: "M&M Pack",
             price: 1.25,
-            count: 7
+            itemStock: 7
           },
           3: {
-            item: "Coke",
+            itemName: "Coke",
             price: 1.75,
-            count: 9
+            itemStock: 9
           },
           4: {
-            item: "Pepsi",
+            itemName: "Pepsi",
             price: 2.55,
-            count: 11
+            itemStock: 11
           },
           5: {
-            item: "RootBeer",
+            itemName: "RootBeer",
             price: 1.50,
-            count: 8
+            itemStock: 8
+          }
+        }
+      },
+
+      machineChange: {
+        [test.change]:{
+          dollar: {
+            count: 7
+          },
+          quarter: {
+            count: 23
+          },
+          dime: {
+            count: 35
+          },
+          nickel: {
+            count: 78
+          },
+          penny: {
+            count: 123
           }
         }
       }
@@ -42,8 +62,15 @@ describe("loading vending machine", () => {
   describe("When user loads vending machine", () => {
     describe("When user prints the inventory", () => {
       it("should return mars, M&M, coke, pepsi and rootbeer", () => {
-        const change = test.subject.getChange(test.vending);
-        expect(change).toBe("Mars Bar, M&M Pack, Coke, Pepsi, RootBeer");
+        const inventory = test.subject.countInventory(test.vending);
+        expect(inventory).toBe("Mars Bar, M&M Pack, Coke, Pepsi, RootBeer");
+      });
+    });
+
+    describe("When user refills the inventory", () => {
+      it("should return all items with 15 stocks", () => {
+        const refill = test.subject.refillStock(test.vending);
+        expect(refill).toBe("Mars Bar: 15, M&M Pack: 15, Coke: 15, Pepsi: 15, RootBeer: 15");
       });
     });
   });
