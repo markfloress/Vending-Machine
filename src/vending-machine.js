@@ -5,25 +5,45 @@ module.exports = class VendingMachine {
     this.data = processedData(data)
   }
 
-  countInventory(inputChange){
-    const change = this.data.machine[inputChange]
+  countInventory(machineStock){
+    const stock = this.data.machine[machineStock]
     const inventory = []
 
-    for(let item in change){
-      inventory.push(change[item].itemName)
+    for(let item in stock){
+      inventory.push(stock[item].itemName)
     }
 
     return inventory.join(', ')
   }
 
-  refillStock(inputChange){
-    const change = this.data.machine[inputChange]
-    const inventory = []
+  refillStock(machineStock){
+    const stock = this.data.machine[machineStock]
+    const inventoryCount = []
+    const inventoryName = []
 
-    for(let item in change){
-      inventory.push(change[item].itemName)
+    for(let item in stock){
+      inventoryCount.push(stock[item].itemStock)
     }
 
-    return inventory.join(', ')
+    for(let name in stock){
+      inventoryName.push(stock[name].itemName)
+    }
+
+    const refillCount = inventoryCount.map( x => {
+      if(x < 15){
+        let increase = 15 - x
+        return x + increase
+      } else {
+        return x
+      }
+
+      return x
+    })
+
+    const refilledStock = inventoryName.reduce((arr, val, idx) => {
+      return arr.concat(`${val}: ${refillCount[idx]}`)
+    }, [])
+
+    return refilledStock.join(', ')
   }
 }
