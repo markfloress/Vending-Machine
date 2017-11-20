@@ -76,8 +76,8 @@ describe("loading vending machine", () => {
 
     describe("When user resupplies the change", () => {
       it("should return all the coins with maximum count", () => {
-        const refill = test.subject.refillStock(test.vending);
-        expect(refill).toBe("dollars: 10, quarter: 50, dime: 50, nickel: 100, penny: 200");
+        const resupply = test.subject.resupplyCoins(test.change);
+        expect(resupply).toBe("dollar: 10, quarter: 50, dime: 50, nickel: 100, penny: 200");
       });
     });
   });
